@@ -11,11 +11,9 @@ stages:
 
 build:
   stage: build
-  image: $IMAGE_NODE
   before_script:
     - docker login -u $USERNAME -p $PASSWORD $REGISTRY
   script:
-    - npm install
     - docker build -t $IMAGE_NAME:$IMAGE_TAG .
     - docker image tag $IMAGE_NAME:$IMAGE_TAG $REGISTRY/$IMAGE_NAME:$IMAGE_TAG
     - docker push $REGISTRY/$IMAGE_NAME:$IMAGE_TAG
