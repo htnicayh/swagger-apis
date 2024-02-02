@@ -1,0 +1,54 @@
+variables:
+  IMAGE_NODE: 'node:14'
+  IMAGE_TAG: latest
+  IMAGE_NAME: backend
+  CONTAINER: backend
+
+stages:
+  - build
+  - test
+  - deploy
+
+build:
+  stage: build
+  image: $NODE_IMAGE
+  before_script:
+    - npm install
+    - docker login -u $USERNAME -p $PASSWORD $REGISTRY
+  script:
+    - docker build -t $IMAGE_NAME:$IMAGE_TAG .
+    - docker image tag $IMAGE_NAME:$IMAGE_TAG $REGISTRY/$IMAGE_NAME:$IMAGE_TAG
+    - docker push $REGISTRY/$IMAGE_NAME:$IMAGE_TAG
+    - docker image rm -f $IMAGE_NAME:$IMAGE_TAG
+    - echo "$IMAGE_NAME:$IMAGE_TAG"
+  after_script:
+    - echo "Build successfully"
+    - echo "You need to check careful log, If you don't know then ask me"
+  only:
+    - master
+
+test:
+  stage: test
+  image: $IMAGE_NODE
+  script:
+    - npm run test
+  after_script:
+    - echo "You need to check careful log, If you don't know then ask me"
+  only:
+    - master
+
+deploy:
+  stage: deploy
+  script:
+    - ssh root@$DEPLOY "
+      sudo service docker stop &&
+      sudo service docker start &&  
+      docker login -u $USERNAME -p $PASSWORD $REGISTRY && 
+      docker pull $REGISTRY/$IMAGE_NAME:$IMAGE_TAG && 
+      docker run -dp 3000:3000 $REGISTRY/$IMAGE_NAME:$IMAGE_TAG "
+  after_script:
+    - echo "You need to check careful log, If you don't know then ask me"
+  only:
+    - master
+
+    
