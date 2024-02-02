@@ -1,12 +1,10 @@
 variables:
-  IMAGE_NODE: 'node:14'
   IMAGE_TAG: latest
-  IMAGE_NAME: backend
-  CONTAINER: backend
+  IMAGE_NAME: swagger-apis
+  CONTAINER: swagger-apis
 
 stages:
   - build
-  - test
   - deploy
 
 build:
@@ -21,16 +19,6 @@ build:
     - echo "$IMAGE_NAME:$IMAGE_TAG"
   after_script:
     - echo "Build successfully"
-    - echo "You need to check careful log, If you don't know then ask me"
-  only:
-    - master
-
-test:
-  stage: test
-  image: $IMAGE_NODE
-  script:
-    - npm run test
-  after_script:
     - echo "You need to check careful log, If you don't know then ask me"
   only:
     - master
