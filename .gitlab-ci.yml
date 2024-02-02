@@ -11,7 +11,7 @@ stages:
 
 build:
   stage: build
-  image: $NODE_IMAGE
+  image: $IMAGE_NODE
   before_script:
     - npm install
     - docker login -u $USERNAME -p $PASSWORD $REGISTRY
@@ -51,4 +51,3 @@ deploy:
   only:
     - master
 
-    
