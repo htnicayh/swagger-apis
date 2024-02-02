@@ -26,7 +26,7 @@ build:
 deploy:
   stage: deploy
   script:
-    - ssh root@$DEPLOY "
+    - sudo ssh root@$DEPLOY "
       sudo service docker stop &&
       sudo service docker start &&  
       docker login -u $USERNAME -p $PASSWORD $REGISTRY && 
