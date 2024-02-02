@@ -48,13 +48,13 @@ export class BookController {
     )
   }
 
-  @Delete('/book')
-  @ApiOperation({ summary: 'Delete book with provided name' })
-  @ApiResponse({ status: 200, description: 'Delete book successfullly', type: Response })
-  delete(@Query('name') name: string): Response {
-    return new Response(
-      HttpStatus.OK,
-      this.bookService.delete(name)
-    )
-  }
+  // @Delete('/book')
+  // @ApiOperation({ summary: 'Delete book with provided name' })
+  // @ApiResponse({ status: 200, description: 'Delete book successfullly', type: Response })
+  // delete(@Query('name') name: string): Response {
+  //   return new Response(
+  //     HttpStatus.OK,
+  //     this.bookService.delete(name)
+  //   )
+  // }
 }
