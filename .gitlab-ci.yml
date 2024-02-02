@@ -33,6 +33,7 @@ deploy:
       docker pull $REGISTRY/$IMAGE_NAME:$IMAGE_TAG && 
       docker run -dp 3000:3000 $REGISTRY/$IMAGE_NAME:$IMAGE_TAG "
   after_script:
+    - echo "Deploy successfully"
     - echo "You need to check careful log, If you don't know then ask me"
   only:
     - master
