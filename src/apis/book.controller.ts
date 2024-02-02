@@ -26,16 +26,16 @@ export class BookController {
     )
   }
 
-  @Get('/book')
-  @ApiOperation({ summary: 'Get book with provide identify' })
-  @ApiResponse({ status: 200, description: 'Get book successfullly', type: Response })
-  findOne(@Query('name') name: string): Response {
-    return new Response(
-      HttpStatus.OK,
-      'Get book successfully.',
-      this.bookService.findOne(name)
-    )
-  }
+  // @Get('/book')
+  // @ApiOperation({ summary: 'Get book with provide identify' })
+  // @ApiResponse({ status: 200, description: 'Get book successfullly', type: Response })
+  // findOne(@Query('name') name: string): Response {
+  //   return new Response(
+  //     HttpStatus.OK,
+  //     'Get book successfully.',
+  //     this.bookService.findOne(name)
+  //   )
+  // }
 
   // @Get('/books')
   // @ApiOperation({ summary: 'Get all books' })
