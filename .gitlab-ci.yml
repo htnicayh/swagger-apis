@@ -26,7 +26,6 @@ build:
 deploy:
   stage: deploy
   script:
-    - sudo -i
     - ssh root@$DEPLOY "
       sudo service docker stop &&
       sudo service docker start &&  
