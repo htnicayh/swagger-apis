@@ -1,7 +1,7 @@
 variables:
   IMAGE_TAG: latest
-  IMAGE_NAME: swagger-apis
-  CONTAINER: swagger-apis
+  IMAGE_NAME: backend
+  CONTAINER: backend
 
 stages:
   - build
@@ -26,12 +26,12 @@ build:
 deploy:
   stage: deploy
   script:
-    - ssh -o StrictHostKeyChecking=no root@$DEPLOY
-    - sudo service docker stop
-    - sudo service docker start
-    - docker login -u $USERNAME -p $PASSWORD $REGISTRY
-    - docker pull $REGISTRY/$IMAGE_NAME:$IMAGE_TAG
-    - docker run -dp 3000:3000 $REGISTRY/$IMAGE_NAME:$IMAGE_TAG
+    - ssh root@$DEPLOY "
+      sudo service docker stop &&
+      sudo service docker start &&  
+      docker login -u $USERNAME -p $PASSWORD $REGISTRY && 
+      docker pull $REGISTRY/$IMAGE_NAME:$IMAGE_TAG && 
+      docker run -dp 3000:3000 $REGISTRY/$IMAGE_NAME:$IMAGE_TAG "
   after_script:
     - echo "You need to check careful log, If you don't know then ask me"
   only:
