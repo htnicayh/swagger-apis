@@ -37,16 +37,16 @@ export class BookController {
     )
   }
 
-  @Get('/books')
-  @ApiOperation({ summary: 'Get all books' })
-  @ApiResponse({ status: 200, description: 'Get all books successfully' })
-  findAll(): Response {
-    return new Response(
-      HttpStatus.OK,
-      'Get all books successfully.',
-      this.bookService.findAll()
-    )
-  }
+  // @Get('/books')
+  // @ApiOperation({ summary: 'Get all books' })
+  // @ApiResponse({ status: 200, description: 'Get all books successfully' })
+  // findAll(): Response {
+  //   return new Response(
+  //     HttpStatus.OK,
+  //     'Get all books successfully.',
+  //     this.bookService.findAll()
+  //   )
+  // }
 
   // @Delete('/book')
   // @ApiOperation({ summary: 'Delete book with provided name' })
